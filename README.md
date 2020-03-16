@@ -5,13 +5,14 @@
 
 ## Installation
 
-  1.used the bundle gem to create the ruby gems for my project.
-  2.created the Git repository and used its links for  meta data in gem-spec files.
-  3.updated the ruby version and installed all updated bundle and gems
-  4.all required dependencies have been added to the gem-spec file
-  5.installed the atom text editor for writing  code's project
-  6.Installed the License gem
-  7.initiated the git repo and  push changes on the project to the git Repo
+  1. used the bundle gem to create the ruby gems for my project.
+  2. created the Git repository and used its links for  meta data in gem-spec files.
+  3. updated the ruby version and installed all updated bundle and gems.
+  4. all required dependencies have been added to the gem-spec file.
+  5. installed the atom text editor for writing  code's project.
+  6. Installed the License gem.
+  7. Check if Nokogiri is installed for your data scraping.
+  8. initiated the git repo and  push changes on the project to the git Repo.
 
 ## Usage
  this web scraper app is for getting some data from web regarding the available rental-student housing.
