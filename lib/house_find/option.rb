@@ -33,8 +33,9 @@ class HouseFind::Option
     def self.scrape_list
      gov_list=[]
      doc= Nokogiri::HTML(URI.open("https://pyramind.com/housing-assistance/"))
+     
         list=self.new
-        list.provider = doc.css('h2').collect{|x| x.text.split(",")}[0..5] # this web has only 5 possible lists always
+        list.provider = doc.css('h2').collect{|x| x.text.split(",")}[0..5] # this web has max 5 possible lists always
         list.url =doc.css('a').attr('href')
         gov_list<<list
     end
