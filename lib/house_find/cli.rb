@@ -12,7 +12,7 @@ class HouseFind::CLI
 
  @options=HouseFind::Option.today
  for x in 1..11 do # because web page normally puts only 12 lists
- @options.each{ |o| puts "#{x}. #{o.provider[x]}-#{o.price_range[x]}-#{o.location[x]}-#{o.description}-#{o.url}"}
+ @options.each{ |o| puts "#{x}. Provider:#{o.provider[x]}- Price:#{o.price_range[x]}-Location:#{o.location[x]}- #{o.description}==>#{o.url}"}
  end
 
 end
@@ -29,7 +29,9 @@ end
  def affordable_list
   puts" Welcome to explore possible Affordable housing in Bay-Area California"
   @options=HouseFind::Option.gov
-  @options.each{|x| puts x.provider}
+   for i in 1..4 do
+    @options.each{|x| puts"#{i}. #{x.provider[i].join} ==> The link is via: #{x.url}"}
+  end
  end
 
  def good_bye
