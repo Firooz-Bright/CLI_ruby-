@@ -9,8 +9,8 @@ class HouseFind::CLI
 
  def student_full_list
   puts "Welcome to explore Student housing options in Bay-Area California"
+  @options=HouseFind::Option.today
 
- @options=HouseFind::Option.today
  num=nil
   @options.each{|x| num=x.provider.to_a}
     for x in 1..num.count-1  # Because this webpage only has  11 lists to show.
@@ -22,6 +22,7 @@ end
  def rental_price
   puts" Welcome  to see the price ranges for sudent rental options"
   @options=HouseFind::Option.today
+
   num=nil
    @options.each{|x| num=x.price_range.to_a}
      for i in 1..num.count-1   #  this  web  has  only 11 lists
@@ -34,10 +35,11 @@ end
  def affordable_list
   puts" Welcome to explore possible Affordable housing in Bay-Area California"
   @options=HouseFind::Option.gov
+
   num=nil
    @options.each{|x| num=x.provider.to_a}
-     for i in 1..num.count-2               #Because this webpage has only 4 lists
-    @options.each{|x| puts"#{i}. #{x.provider[i].join} ==> The link is via: #{x.url}"}
+      for i in 1..num.count-2               #Because this webpage has only 4 lists
+          @options.each{|x| puts"#{i}. #{x.provider[i].join} ==> The link is via: #{x.url}"}
       end
  end
 
@@ -60,6 +62,6 @@ end
      else (input=="exit")
        good_bye
       end
-     end
-   
+   end
+
 end
