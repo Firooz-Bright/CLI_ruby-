@@ -2,8 +2,7 @@
 class HouseFind::Option
 
   attr_accessor  :provider,:availability,:price_range ,:url,:location,:description
-
-
+  
   def self.today
       self.scrape_options
   end
@@ -38,9 +37,5 @@ class HouseFind::Option
         list.provider = doc.css('h2').collect{|x| x.text.split(",")}[0..5]
         gov_list<<list
     end
-
-
-
-
 
 end
