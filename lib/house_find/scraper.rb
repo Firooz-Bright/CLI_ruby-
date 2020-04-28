@@ -52,7 +52,7 @@ class HouseFind::Scraper
      
       doc= Nokogiri::HTML(URI.open("https://www.firstcommunityhousing.org/findhousing"))
 
-       info = doc.css('li').collect{|x| x.text.split(",")}
+       info = doc.css('li').collect{|x| x.text.split(",")}[13..82]  #most available lists are there 
 
         for i in 0..info.length-1
            list= HouseFind::Option.new
