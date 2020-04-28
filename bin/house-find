@@ -3,6 +3,8 @@ require 'open-uri'
 require 'nokogiri'
 require './lib/house_find'
 require "bundler/setup"
+
 #require "house_find"
 
 HouseFind::CLI.new.call
+ 

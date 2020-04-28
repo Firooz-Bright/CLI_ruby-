@@ -1,57 +1,36 @@
 class HouseFind::Option
 
-  attr_accessor  :provider,:price_range ,:url,:location,:description
+  attr_accessor  :provider, :price_range ,:url,:location,:description
   
-    @@all= []
+    @@all = []
+  
     
-   def initialize
+   def initialize #(provider,price_range,location)
 
-     @@all << self 
-
+     
+      @@all << self 
+   
     end 
+
  
-  def self.student_housing
+  def  self.create_student_housing
 
-    list= HouseFind::Scraper.today
-
-    num=nil
-    list.each{|x| num=x.provider.to_a}
-    for x in 1..num.count-1  # Because this webpage only has  11 lists to show.
-
-   list.each{ |o| puts "#{x}. Provider:#{o.provider[x]}- Price:#{o.price_range[x]}-Location:#{o.location[x]}- #{o.description}==>#{o.url}"}
-    end 
-
+       HouseFind::Scraper.scrape_options
+    
   end 
 
 
-  def self.rent_prices
+  def self.create_affordable_housing
 
-    list= HouseFind::Scraper.today
-  
-     num=nil
-
-     list.each{|x| num = x.price_range.to_a}
-
-    for i in 1..num.count-1   #  this  web  has  only 11 lists
-         
-         list.each{|x|  puts "#{i}.#{x.price_range[i]}"}
-     end
-         
+       HouseFind::Scraper.scrape_list
+ 
   end 
 
-  def self.government_housing 
 
-    list= HouseFind::Scraper.gov
-    num=nil
-    list.each{|x| num=x.provider.to_a}
+  def self.create_other_list
 
-      for i in 1..num.count-2               #Because this webpage has only 4 lists
-          list.each{|x| puts"#{i}. #{x.provider[i].join} ==> The link is via: #{x.url}"}
-      end
-
-
-  end 
-
+     HouseFind::Scraper.other
+ end 
 
   def self.all
     @@all

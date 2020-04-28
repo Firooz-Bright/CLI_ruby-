@@ -1,56 +1,66 @@
+
 class HouseFind::Scraper 
  
 
-  def self.today
-      self.scrape_options
-  end
+    def self.scrape_options
 
-  def  self.gov
-    self.scrape_list
-  end
+       doc= Nokogiri::HTML(URI.open("https://www.nestpick.com/student-accommodation/san-francisco/"))
+          info =doc.css(".property-card-provider").collect{|x| x.text}
+            address =doc.css(".property-card-title").collect{|x| x.text}
+            price=doc.css("p.property-card-price").collect{|x| x.text.split().first}
+                        
+               for i in 0..info.length-1
 
-  def  self.scrape_options
-      options=[]
-      options << self.scrape_student_house_list
-      options
-  end
+                list= HouseFind::Option.new
 
+                list.provider=info[i]
 
-  def  self.scrape_student_house_list
+                list.location=address[i]
 
-    doc= Nokogiri::HTML(URI.open("https://www.nestpick.com/student-accommodation/san-francisco/"))
+                list.price_range= price[i]
 
-                   list= HouseFind::Option.new
+                list.description = doc.css("h2").text
 
-                   list.provider=doc.css(".property-card-provider").collect{|x| x.text}
-                   list.location=doc.css(".property-card-title").collect{|x| x.text}
-                   list.price_range=doc.css("p.property-card-price").collect{|x| x.text.split().first}
-                   list.description = doc.css("h2").text
-                   list.url= doc.css('a').attr("href")
-                   list
-    end
+                list.url= doc.css('a').attr("href")
 
-    def self.scrape_list
+                list
+                                      
+                end
+                                        
+                      
+            end 
 
-     gov_list=[]
+      
+  def self.scrape_list
+
+ 
 
      doc= Nokogiri::HTML(URI.open("https://pyramind.com/housing-assistance/"))
 
-        list=HouseFind::Option.new
+       info = doc.css('h2').collect{|x| x.text.split(",")}[0..4] # this web has max 5 possible lists always
 
-        list.provider = doc.css('h2').collect{|x| x.text.split(",")}[0..5] # this web has max 5 possible lists always
-        list.url =doc.css('a').attr('href')
+        for i in 0..info.length-1
+           list= HouseFind::Option.new
+            list.provider=info[i]
+            list.url =doc.css('a').attr('href')
+             list
+           end 
+      end
 
-        gov_list << list
-    end
 
+     def self.other 
+     
+      doc= Nokogiri::HTML(URI.open("https://www.firstcommunityhousing.org/findhousing"))
 
-    def self.other_list
+       info = doc.css('li').collect{|x| x.text.split(",")}
 
-    	other_lists=[]
-
-          doc= Nokogiri::HTML(URI.open(" "))
-     end 
+        for i in 0..info.length-1
+           list= HouseFind::Option.new
+            list.provider=info[i]
+            list.url =doc.css('a').attr('href')
+             list
+           end 
+   end 
 
 end
 
@@ -58,6 +68,4 @@ end
 
 
  
-
-
 
