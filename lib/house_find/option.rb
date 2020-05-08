@@ -36,7 +36,7 @@ class HouseFind::Option
     @@all
   end
  
-  def self.reset_all
+  def self.reset
     @@all.clear
   end
   

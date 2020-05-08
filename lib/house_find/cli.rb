@@ -7,11 +7,14 @@ class HouseFind::CLI
   
  def student_full_list
 
+  
   puts "Welcome to explore Student housing options in Bay-Area California"
 
      HouseFind::Option.create_student_housing
 
      HouseFind::Option.all.each_with_index{|x,i| puts "#{i+1}. Provider:#{x.provider} ==> Location:#{x.location} price_range:#{x.price_range} - #{x.description}==>#{x.url}" }
+
+     menu
    end
 
 
@@ -24,7 +27,7 @@ class HouseFind::CLI
      HouseFind::Option.create_student_housing
 
       HouseFind::Option.all.each_with_index{|x,i| puts "#{i+1}.#{x.price_range}"}
-
+   menu
   
  end
 
@@ -36,7 +39,7 @@ class HouseFind::CLI
      list= HouseFind::Option.create_affordable_housing
 
       HouseFind::Option.all.each_with_index{|x,i| puts "#{i+1}.#{x.provider.join}==>#{x.url}"}
-   
+   menu
  end 
   
 
@@ -51,8 +54,8 @@ class HouseFind::CLI
 
     HouseFind::Option.all.each_with_index{|x,i| puts "#{i+1}.#{x.provider.join} ==>#{x.url}"}
    
-
-   puts 
+   menu
+   
 
   end 
 
@@ -62,6 +65,9 @@ class HouseFind::CLI
   end
 
  def menu
+
+   HouseFind::Option.reset
+
    puts " Please choose your options by number or exit: \n \n 1.Student Housing full list  \n 2.Rental price range  \n 3.Affordable Rental provider \n 4.Government list"
 
    input= gets.strip.upcase
